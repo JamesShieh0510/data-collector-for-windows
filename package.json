@@ -1,0 +1,31 @@
+{
+  "name": "data-collector-for-windows",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JamesShieh0510@github.com/JamesShieh0510/data-collector-for-windows.git"
+  },
+  "author": "james.shieh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesShieh0510/data-collector-for-windows/issues"
+  },
+  "homepage": "https://github.com/JamesShieh0510/data-collector-for-windows#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "desktop-uploader": "^0.1.3",
+    "express": "^4.16.4",
+    "gulp": "^4.0.0",
+    "mongoose": "^5.4.0",
+    "request": "^2.88.0"
+  }
+}
