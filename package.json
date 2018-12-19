@@ -21,11 +21,18 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "async": "^2.6.1",
     "body-parser": "^1.18.3",
+    "chokidar": "^2.0.4",
+    "cloudinary": "^1.13.2",
     "desktop-uploader": "^0.1.3",
     "express": "^4.16.4",
+    "formidable": "^1.2.1",
     "gulp": "^4.0.0",
+    "i": "^0.3.6",
+    "lodash": "^4.17.11",
     "mongoose": "^5.4.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "stream-throttle": "^0.1.3"
   }
 }

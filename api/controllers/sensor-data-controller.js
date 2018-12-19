@@ -1,5 +1,6 @@
 'use strict';
 
+var formidable = require('formidable');
 
 // var mongoose = require('mongoose'),
 //   Task = mongoose.model('Tasks');
@@ -17,13 +18,19 @@ exports.list_all_tasks = function(req, res) {
 
 exports.upload_a_batch_data = function(req, res) {
   //var new_task = new Task(req.body);
-  res.json(req.body);
+  //res.json(req.body);
   console.log(req.body);
-  // new_task.save(function(err, task) {
-  //   if (err)
-  //     res.send(err);
-  //   res.json(task);
-  // });
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files) {
+    if(err) {
+        return res.redirect(303, '/error');
+    }
+    console.log('received fields: ');
+    console.log(fields);
+    console.log('received files: ');
+    console.log(files);
+    return res.redirect(303, '/thankyou');
+  });
 };
 
 
