@@ -37,7 +37,10 @@ def getPredictFile():
 
 query_file=getPredictFile()
 result_type=['normal','type1','type2','type3','type4','type5','type6']
+
 exception_type_number=6
+
+split_char="&"
 with open('../../../config.json') as json_data_file:
     data = json.load(json_data_file)
 try:
@@ -59,7 +62,6 @@ try:
         result = result_type[prediction[0]]
     else:
         result = result_type[exception_type_number]
-    split_char="&"
     print (split_char+query_file+split_char+result+split_char)
 
 except:
