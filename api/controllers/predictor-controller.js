@@ -13,7 +13,9 @@ exports.predict_result= function(req, res, callback) {
 		var exe_path = config.algorithm_path;
 		var raw_data_path = config.raw_data_path;
 		var algorithm_cmd = config.algorithm_cmd;
-		var workerProcess = child_process.exec(algorithm_cmd+' '+raw_data_path+' '+predictItemId, {cwd: exe_path},
+		var model_path = config.model_path;
+
+		var workerProcess = child_process.exec(algorithm_cmd+' '+raw_data_path+' '+model_path+' '+predictItemId, {cwd: exe_path},
 			function (error, stdout, stderr) {
 				if (error) {
 					console.log(error.stack);

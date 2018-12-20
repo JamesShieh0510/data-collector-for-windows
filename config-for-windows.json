@@ -1,7 +1,8 @@
 {
     "algorithm_cmd" : "python predict_online.py",
+    "model_path" : "C:\\Vibration100hz.h5",
     "algorithm_path" : "C:\\Users\\autolab\\data-collector-for-windows\\api\\controllers\\plugin",
     "raw_data_path" : "C:\\can-bus-project\\data\\vibration\\",
     "uploader_local_path" : "/Users/jamesshieh/Downloads/DATA1",
 	"uploader_remote_path" : "vibration/"
-}
+}	

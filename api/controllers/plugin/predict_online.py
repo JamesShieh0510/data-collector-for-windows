@@ -22,11 +22,12 @@ import os
 #print ('Argument List:', str(sys.argv))
 
 raw_data_path=sys.argv[1] #'test-data/data/'
+model_path=sys.argv[2] #'test-data/data/'
 def order_index(file_name):
     return('{:0>6d}'.format(int(file_name[1:].replace('.txt',''))))
 def getPredictFile():
-    if len(sys.argv)==3:
-        return (sys.argv[2]);
+    if len(sys.argv)==4:
+        return (sys.argv[3]);
     else:
         file_list = os.listdir(raw_data_path)
         file_list=sorted(file_list, key = order_index,reverse=True)   
@@ -41,11 +42,9 @@ result_type=['normal','type1','type2','type3','type4','type5','type6']
 exception_type_number=6
 
 split_char="&"
-with open('../../../config.json') as json_data_file:
-    data = json.load(json_data_file)
+
 try:
-    algorithm_path =  data['algorithm_path']
-    model = keras.models.load_model(algorithm_path+'Vibration100hz.h5')
+    model = keras.models.load_model(model_path)
 
 
 
