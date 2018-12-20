@@ -15,6 +15,7 @@ import numpy as np
 import keras
 import time
 import sys
+import json
 import os
 
 #print ('Number of arguments:', len(sys.argv), 'arguments.')
@@ -37,9 +38,11 @@ def getPredictFile():
 query_file=getPredictFile()
 result_type=['normal','type1','type2','type3','type4','type5','type6']
 exception_type_number=6
-# 從 HDF5 檔案中載入模型
+with open('../../../config.json') as json_data_file:
+    data = json.load(json_data_file)
 try:
-    model = keras.models.load_model('Vibration100hz.h5')
+    algorithm_path =  data['algorithm_path']
+    model = keras.models.load_model(algorithm_path+'Vibration100hz.h5')
 
 
 

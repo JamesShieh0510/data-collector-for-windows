@@ -59,7 +59,7 @@ def uploadThis(local_path,remote_path):
 
 # t = Timer(5.0, uploadThis(local_path,remote_path))
 # t.start() 
-with open('uploader_config.json') as json_data_file:
+with open('uploader-config.json') as json_data_file:
     data = json.load(json_data_file)
 
 def getFiles():
