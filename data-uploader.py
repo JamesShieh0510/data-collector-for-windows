@@ -13,6 +13,8 @@ import os
 import datetime
 import time
 from threading import Timer
+import json
+
 
 
 
@@ -57,21 +59,28 @@ def uploadThis(local_path,remote_path):
 
 # t = Timer(5.0, uploadThis(local_path,remote_path))
 # t.start() 
+with open('uploader_config.json') as json_data_file:
+    data = json.load(json_data_file)
+
+def getFiles():
+    #for vibration data
+    local_path =  data['vibration']['local_path']
+    remote_path = data['vibration']['remote_path']
+    uploadThis(local_path,remote_path)
+    #for current data
+    local_path =  data['current']['local_path']
+    remote_path = data['current']['remote_path']
+    uploadThis(local_path,remote_path)
+    #for temperature data
+    local_path =  data['temperature']['local_path']
+    remote_path = data['temperature']['remote_path']
+    uploadThis(local_path,remote_path)
+
+
 try:
-	while True:
-		time.sleep(10)
-		#for vibration data
-		local_path = '/Users/jamesshieh/Downloads/DATA1'
-		remote_path = 'vibration/'
-		uploadThis(local_path,remote_path)
-		#for urrent data
-		local_path = '/Users/jamesshieh/Downloads/DATA2'
-		remote_path = 'current/'
-		uploadThis(local_path,remote_path)
-		#for temperature data
-		local_path = '/Users/jamesshieh/Downloads/DATA3'
-		remote_path = 'temperature/'
-		uploadThis(local_path,remote_path)
+    while True:
+        time.sleep(10)
+        getFiles()
 finally:
 	pass
 

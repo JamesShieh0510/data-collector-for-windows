@@ -16,46 +16,46 @@ var predictor =  require('./api/routes/predictor');
 app.use('/predictor', predictor);
 app.use('/sensors', sensorData);
 
-
-var path='/Users/jamesshieh/Downloads/DATA';
-var uploader = new DesktopUploader({
-	name: 'my-cool-app',
-	paths: [path],
-	concurrency: 1,
-	retries: 1
-});
-uploader.on('upload', function (entry, done) {
-  console.log('Uploading ' + entry.path);
+// var config = require('./config.json');
+// var path=config.uploader_local_path;
+// var uploader = new DesktopUploader({
+// 	name: 'my-cool-app',
+// 	paths: [path],
+// 	concurrency: 1,
+// 	retries: 1
+// });
+// uploader.on('upload', function (entry, done) {
+//   console.log('Uploading ' + entry.path);
  
-  // Create an HTTP POST request
-  var req = http.request({
-    method: 'POST',
-    hostname: '127.0.0.1:3000',
-    path: '/sensors',
-    headers: {
-      authorization: 'bearer abc123def456'
-    }
-  });
+//   // Create an HTTP POST request
+//   var req = http.request({
+//     method: 'POST',
+//     hostname: '127.0.0.1:3000',
+//     path: '/sensors',
+//     headers: {
+//       authorization: 'bearer abc123def456'
+//     }
+//   });
  
-  // Ensure we call `done` in all cases!
-  req.on('error', done);
+//   // Ensure we call `done` in all cases!
+//   req.on('error', done);
  
-  req.on('response', function (res) {
-    if (res.statusCode == 200) {
-      done()
-    } else {
-      done(new Error('Bad response!'));
-    }
-  });
+//   req.on('response', function (res) {
+//     if (res.statusCode == 200) {
+//       done()
+//     } else {
+//       done(new Error('Bad response!'));
+//     }
+//   });
  
-  // Pipe the file data into the request
-  entry.stream.pipe(req);
-});
+//   // Pipe the file data into the request
+//   entry.stream.pipe(req);
+// });
+// uploader.throttle = false;
 
 
  
 console.log('data collector RESTful API server started on: ' + port);
 app.listen(port);
-uploader.throttle = false;
 
 

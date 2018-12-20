@@ -1,0 +1,7 @@
+{
+    "algorithm_cmd" : "ipython ./predict_online.py",
+    "algorithm_path" : "/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/",
+    "raw_data_path" : "test-data/data/",
+    "uploader_local_path" : "/Users/jamesshieh/Downloads/DATA1",
+	"uploader_remote_path" : "vibration/"
+}

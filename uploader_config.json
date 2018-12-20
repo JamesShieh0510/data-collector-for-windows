@@ -1,0 +1,12 @@
+{
+  "vibration":
+  {      "local_path": "/Users/jamesshieh/Downloads/DATA1",
+        "remote_path": "vibration/"}
+  ,"current":
+  {      "local_path": "/Users/jamesshieh/Downloads/DATA2",
+        "remote_path": "current/"}
+  ,"temperature":
+  {      "local_path": "/Users/jamesshieh/Downloads/DATA3",
+        "remote_path": "temperature/"}
+
+}

@@ -20,14 +20,14 @@ import os
 #print ('Number of arguments:', len(sys.argv), 'arguments.')
 #print ('Argument List:', str(sys.argv))
 
-working_path=sys.argv[1] #'test-data/data/'
+raw_data_path=sys.argv[1] #'test-data/data/'
 def order_index(file_name):
     return('{:0>6d}'.format(int(file_name[1:].replace('.txt',''))))
 def getPredictFile():
     if len(sys.argv)==3:
         return (sys.argv[2]);
     else:
-        file_list = os.listdir(working_path)
+        file_list = os.listdir(raw_data_path)
         file_list=sorted(file_list, key = order_index,reverse=True)   
         return (file_list[0])
 #order file name by dec 
@@ -46,7 +46,7 @@ try:
     x_img_test_normalize=np.zeros((1,20,20,1))
 
        
-    x_img_test_normalize[0,:,:,0]=np.loadtxt(working_path+query_file)
+    x_img_test_normalize[0,:,:,0]=np.loadtxt(raw_data_path+query_file)
     time.sleep(2)
     prediction=model.predict_classes(x_img_test_normalize)
 

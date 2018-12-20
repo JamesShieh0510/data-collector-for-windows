@@ -1,6 +1,7 @@
 'use strict';
 
 const child_process = require('child_process');
+var config = require('../../config.json');
 
 exports.predict_result= function(req, res, callback) {
 	var predictItemId='';
@@ -8,9 +9,11 @@ exports.predict_result= function(req, res, callback) {
 		predictItemId=req.params.predictItemId;
 
 	try {
-		var exe_path = '/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/'
 
-		var workerProcess = child_process.exec('ipython ./predict_online.py test-data/data/ '+predictItemId, {cwd: exe_path},
+		var exe_path = config.algorithm_path;
+		var raw_data_path = config.raw_data_path;
+		var algorithm_cmd = config.algorithm_cmd;
+		var workerProcess = child_process.exec(algorithm_cmd+' '+raw_data_path+' '+predictItemId, {cwd: exe_path},
 			function (error, stdout, stderr) {
 				if (error) {
 					console.log(error.stack);
@@ -30,7 +33,7 @@ exports.predict_result= function(req, res, callback) {
 			console.log('Child process exited with exit code ' + code);
 		});
 	} catch (err) {
-	  return "{result:error}";
+	  callback(err);
 	}
 		
 };
