@@ -21,8 +21,6 @@ port="23021"
 timeout=30
 username = "autolab"
 password = "autolab"
-local_path = '/Users/jamesshieh/Downloads/DATA'
-remote_path = 'vibration/'
 ftp=ftplib.FTP();
 #myFTP = ftplib.FTP(server, username, password)
 ftp.connect(server,port,timeout) 
@@ -62,6 +60,17 @@ def uploadThis(local_path,remote_path):
 try:
 	while True:
 		time.sleep(10)
+		#for vibration data
+		local_path = '/Users/jamesshieh/Downloads/DATA1'
+		remote_path = 'vibration/'
+		uploadThis(local_path,remote_path)
+		#for urrent data
+		local_path = '/Users/jamesshieh/Downloads/DATA2'
+		remote_path = 'current/'
+		uploadThis(local_path,remote_path)
+		#for temperature data
+		local_path = '/Users/jamesshieh/Downloads/DATA3'
+		remote_path = 'temperature/'
 		uploadThis(local_path,remote_path)
 finally:
 	pass
