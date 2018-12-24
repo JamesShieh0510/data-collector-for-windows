@@ -37,7 +37,7 @@ def getPredictFile():
 
 
 query_file=getPredictFile()
-result_type=['normal','type1','type2','type3','type4','type5','type6']
+result_type=['standby','normal','abnormal-1','abnormal-2','abnormal-3','standby','standby']
 
 exception_type_number=6
 

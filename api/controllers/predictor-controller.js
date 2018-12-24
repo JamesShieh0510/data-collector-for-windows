@@ -26,7 +26,7 @@ exports.predict_result= function(req, res, callback) {
 				//return "{"+stdout+",result:success}";
 				var split_char="&";
 				var result = stdout.split(split_char);
-				callback(result);
+				callback({'target':result[1],'predicted_result':result[2]});
 				
 
 			}
@@ -40,3 +40,25 @@ exports.predict_result= function(req, res, callback) {
 		
 };
 
+
+
+exports.list_all_items = function(req, res, callback) {
+	if (err) res.json(err);
+	var test_data=function(){
+		return [
+			{
+				"id":"1",
+				"alias":"spindle-0001"
+			},
+			{
+				"id":"2",
+				"alias":"spindle-0002"
+			},
+			{
+				"id":"3",
+				"alias":"spindle-0003"
+			},
+		];
+	};
+	callback(test_data);
+};

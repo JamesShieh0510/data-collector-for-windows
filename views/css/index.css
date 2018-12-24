@@ -1,0 +1,294 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #99cccc;
+  font-family: var(--font__family--default);
+  font-size: 32px;
+}
+
+body {
+  display: grid;
+  grid-template-areas: "header" "content";
+  grid-template-rows: 14.5% 85.5%;
+}
+body > .header {
+  display: flex;
+  grid-area: header;
+  justify-content: flex-end;
+  width: 100%;
+  height: 4.7rem;
+  background-image: url("/images/Design/TITLE_2.png");
+  background-repeat: no-repeat;
+}
+body > .header > .header__icon.icon {
+  display: flex;
+  flex-direction: column;
+  margin: 0.7rem;
+  height: 2.3rem;
+  width: auto;
+  text-decoration: none;
+}
+body > .header > .header__icon.icon > .icon__img {
+  width: 100%;
+  height: 80%;
+}
+body > .header > .header__icon.icon > .icon__text {
+  font-size: 0.5rem;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+}
+body > .header > .header__line {
+  margin-top: 0.5rem;
+  height: 2.3rem;
+}
+body > .content {
+  display: grid;
+  grid-area: content;
+  grid-template-areas: "aside . main .";
+  grid-template-columns: 18% 1fr 79% 1fr;
+  grid-template-rows: 100%;
+  width: 100%;
+  height: 100%;
+}
+body > .content > .aside {
+  display: flex;
+  grid-area: aside;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+body > .content > .aside > .aside__header {
+  margin: 0 0.3rem 0.3rem 0.3rem;
+  width: 99%;
+  height: 55px;
+  border-radius: 0.3rem;
+  background-image: url("/images/Design/MachineState_2.png");
+  background-color: #71a8a8;
+  background-repeat: no-repeat;
+  background-position-x: 0.6rem;
+  background-position-y: center;
+}
+body > .content > .aside > .aside__content.content {
+  margin: 0 0.3rem;
+  width: 99%;
+  height: max-content;
+  background-color: #e6e6e6;
+}
+body > .content > .aside > .aside__content.content > .content__list.list > .list__element {
+  display: flex;
+  margin-bottom: 0.3rem;
+  list-style: none;
+  width: 70%;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+body > .content > .aside > .aside__content.content > .content__list.list > .list__element::before {
+  align-self: center;
+  background-size: 0.66rem;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+  content: "";
+  width: 0.66rem;
+  height: 0.66rem;
+  background-image: url(/images/Design/TITLE_4.png);
+}
+body > .content > .aside > .aside__content.content > .content__list.list > .list__element.list__element--select::after {
+  align-self: center;
+  margin-bottom: 0.05rem;
+  margin-left: 1rem;
+  content: ">>>";
+  font-weight: 1000;
+  width: 0.66rem;
+  height: 0.66rem;
+}
+body > .content > .main {
+  display: grid;
+  grid-area: main;
+  grid-template-areas: ".      header          ." ".      content         ." "logo   logo         logo";
+  grid-template-columns: 1fr 95% 1fr;
+  grid-template-rows: 55px 1fr 55px;
+  width: 100%;
+  background-color: #ffffff;
+}
+body > .content > .main > .main__header {
+  grid-area: header;
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 24px;
+  background-image: url("/images/Design/MachineState_2.png");
+  background-repeat: no-repeat;
+}
+body > .content > .main > .main__machine.machine {
+  display: grid;
+  grid-area: content;
+  grid-template-columns: repeat(auto-fit, 10rem);
+  grid-column-gap: 1rem;
+  grid-row-gap: 0.2rem;
+  overflow-y: auto;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 11rem;
+  border: 10px solid #509090;
+  border-radius: 1rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header {
+  display: flex;
+  justify-content: center;
+  padding: 0.1rem 0;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  font-size: 0.7rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header.content__header--green {
+  background-color: #00ff00;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header.content__header--red {
+  background-color: #ff0000;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header.content__header--gray {
+  background-color: #e6e6e6;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header.content__header--yellow {
+  background-color: #ffcc00;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header > .header__title {
+  height: 100%;
+  align-self: center;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__header.header > .header__number {
+  height: 100%;
+  font-weight: bold;
+  font-size: 0.85rem;
+  align-self: flex-end;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status {
+  display: flex;
+  margin: 0.4rem 0.8rem;
+  width: 100%;
+  height: max-content;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text {
+  display: flex;
+  align-self: center;
+  font-size: 0.7rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text::before {
+  align-self: center;
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text.status__text--green::before {
+  background-image: url(/images/Design/START.png);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text.status__text--yellow::before {
+  background-image: url(/images/Design/RESET.png);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text.status__text--red::before {
+  background-image: url(/images/Design/STOP.png);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__status.status > .status__text.status__text--gray::before {
+  background-image: url(/images/Design/GRAY.png);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__title.title {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__title.title > .title__text {
+  font-size: 0.6rem;
+  margin-right: 0.3rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__title.title > .title__text.title__text--left {
+  margin-right: 1rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data {
+  display: flex;
+  width: 100%;
+  height: max-content;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__canvas.canvas {
+  margin-top: 0.5rem;
+  width: 4rem;
+  height: 2rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__legend {
+  margin-top: 0.3rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__execute.execute {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+  width: 100%;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__execute.execute > .execute__green.green {
+  display: flex;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(90deg, #00ff00 10%, #ffffff 0%);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__execute.execute > .execute__green.green > .green__text {
+  align-self: center;
+  margin-left: 1rem;
+  z-index: 1;
+  font-size: 0.5rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__execute.execute > .execute__red.red {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(90deg, #ff2a2a 10%, #ffffff 0%);
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__data.data > .data__execute.execute > .execute__red.red > .red__text {
+  align-self: center;
+  margin-left: 1rem;
+  font-size: 0.5rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__problem.problem {
+  display: none;
+  grid-template-areas: "img health" "img status";
+  grid-template-columns: 4fr 6fr;
+  margin-top: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
+  width: 100%;
+  height: 30%;
+  background-color: #ffcccc;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__problem.problem.content__problem--active {
+  display: grid;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__problem.problem > .problem__img {
+  grid-area: img;
+  align-self: center;
+  justify-self: center;
+  height: 48px;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__problem.problem > .problem__health {
+  grid-area: health;
+  align-self: flex-end;
+  font-size: 0.7rem;
+}
+body > .content > .main > .main__machine.machine > .machine__content.content > .content__problem.problem > .problem__status {
+  grid-area: status;
+  align-self: flex-start;
+  font-size: 0.7rem;
+}
+body > .content > .main > .main__logo.logo {
+  grid-area: logo;
+  background-image: url(/images/Design/LOGO.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*# sourceMappingURL=index.css.map */

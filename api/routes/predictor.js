@@ -15,4 +15,16 @@ router.get('/:predictItemId', function (req, res) {
 	} );
 });
 
+router.get('/', function (req, res) {
+	PredictController.list_all_items(req,res,function(result){
+		res.json(result);
+	} );
+});
+
+
 module.exports = router;
+
+
+
+
+

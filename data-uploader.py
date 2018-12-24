@@ -15,6 +15,10 @@ import time
 from threading import Timer
 import json
 
+#for windows
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 
@@ -37,7 +41,7 @@ def uploadThis(local_path,remote_path):
 
     os.chdir(local_path)
     for f in files:
-    	
+        
         if os.path.isfile(local_path + '/'+format(f)):
 
             fh = open(f, 'rb')
@@ -82,11 +86,7 @@ try:
         time.sleep(10)
         getFiles()
 finally:
-	pass
-
-
-
-
+    pass
 
 
 
