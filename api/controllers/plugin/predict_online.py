@@ -52,7 +52,7 @@ try:
 
        
     x_img_test_normalize[0,:,:,0]=np.loadtxt(raw_data_path+query_file)
-    time.sleep(2)
+    #time.sleep(2)
     prediction=model.predict_classes(x_img_test_normalize)
 
    

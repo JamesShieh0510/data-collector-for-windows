@@ -32,8 +32,10 @@
           <!-- car 1-->
           <article id="0001" class="machine__content content">
             <header id="content-header" class="content__header header content__header--green">
+              <a href="#" data-src-full="">
               <label class="header__title">機器編號：</label>
               <label id="content-title" class="header__number">5X-29</label>
+              </a>
             </header>
             <section class="content__status status"><img class="status__img" src="/images/Design/MACHINE.png"/>
               <label id="content-status-text" class="status__text status__text--gray">狀態：加工</label>
@@ -55,6 +57,9 @@
                 </section>
               </section>
             </section>
+            <section class="content__sensor__data status">
+              <label id="content-raw-data-text" class="status__text">溫度：27 電流：23</label>
+            </section>            
             <section id="content-problem-section" class="content__problem problem content__problem--active"><img class="problem__img" src="/images/Design/MOTOR_Failure.png"/>
               <label id="content-problem-section-health" class="problem__health">健康：馬達偏心</label>
               <label id="content-problem-section-status" class="problem__status">狀態：嚴重</label>
@@ -315,5 +320,15 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="/js/index.js"></script>
+    <script src="/js/predictor.js"></script>
+    <div class="content__element">
+      <iframe width="1420px" height="450px" src="http://140.116.86.178:3000" class="content__element--iframe"></iframe>
+    </div>
+<!-- lightbox -->
+
+<section class="lightbox">
+  <section class="lightbox__content content"></section>
+
+</section>
   </body>
 </html>

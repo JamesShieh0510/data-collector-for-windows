@@ -1,8 +1,11 @@
 {
     "algorithm_cmd" : "ipython ./predict_online.py",
+    "current_and_temp_collector_cmd" : "ipython ./get_current_and_temp.py",
     "model_path" : "/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/Vibration100hz.h5",
     "algorithm_path" : "/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/",
     "raw_data_path" : "test-data/data/",
+    "current_and_temp_data_path" : "test-data/current/",
     "uploader_local_path" : "/Users/jamesshieh/Downloads/DATA1",
 	"uploader_remote_path" : "vibration/"
 }
+

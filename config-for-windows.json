@@ -1,8 +1,10 @@
 {
     "algorithm_cmd" : "python C:\\predict_online.py",
+    "current_and_temp_collector_cmd" : "python C:\\get_current_and_temp.py",
     "model_path" : "C:\\Vibration100hz.h5",
     "algorithm_path" : "C:\\Users\\autolab\\data-collector-for-windows\\api\\controllers\\plugin",
     "raw_data_path" : "C:\\can-bus-project\\data\\vibration\\",
+    "current_and_temp_data_path" : "C:\\can-bus-project\\data\\current\\",
     "uploader_local_path" : "/Users/jamesshieh/Downloads/DATA1",
 	"uploader_remote_path" : "vibration/"
 }	

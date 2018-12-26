@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var sensorData =  require('./api/routes/sensor-data');
+var data =  require('./api/routes/data-collector');
 var predictor =  require('./api/routes/predictor');
 var web_home =  require('./api/routes/index');
 // ...
@@ -20,6 +21,7 @@ app.use(express.static(__dirname + '/views/'));
 app.set('view engine', 'ejs');
 app.use('/predictor', predictor);
 app.use('/sensors', sensorData);
+app.use('/data', data);
 app.use('/', web_home);
 
 // var config = require('./config.json');
