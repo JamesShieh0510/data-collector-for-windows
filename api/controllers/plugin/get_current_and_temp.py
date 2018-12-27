@@ -50,7 +50,7 @@ try:
     print (split_char+query_file_name+split_char+last_Line_array[1]+split_char+last_Line_array[2]+split_char)
 
 except:
-    print (split_char+query_file_name+split_char+'____'+split_char+'____'+split_char)
+    print (split_char+query_file_name+split_char+'0.0000'+split_char+'0.0'+split_char)
 
 
     

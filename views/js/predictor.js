@@ -20,12 +20,12 @@ $(document).ready(function(){
   PredictorWebServiceAdapter('#0009','standby');
   setInterval(function(){
     call_predictor_api('x'+(test_count).toString()+'.txt');
-    test_count=test_count+100;
-  }, 1000);
+    test_count=test_count+1000;
+  }, 2000);
   setInterval(function(){
     call_raw_data_api('test_'+(test_count_for_temp).toString()+'.lvm');
     test_count_for_temp++;
-  }, 20000);
+  }, 8000);
 
   //set localhost ip
   $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
@@ -69,7 +69,7 @@ function call_predictor_api(target){
   //alert('test');
 }
 
-var test_count_for_temp=0;
+var test_count_for_temp=1;
 function call_raw_data_api(target){
   url=root_url+'data/current_and_temperature/'+target;
 
@@ -93,17 +93,32 @@ function call_raw_data_api(target){
 
         current=response['current'];
         temperature=response['temperature'];
-        id="#0001";
-        setRawDataPanel(id,current,temperature);
+
+        id="#0002";
+        RawDataAdapter(id,current,temperature);
 
  		//溫度：27 電流：23
     }
   });
   //alert('test');
 }
-function setRawDataPanel(id,current,temperature){
-  $(id+' #content-raw-data-text').html('溫度:'+temperature+' 電流:'+current);
+function mappingTemperatureToType(temperature){
+	if(temperature<18.07) return 'standby';
+	if(temperature<23.10) return 'normal';
+	if(temperature<24.15) return 'abnormal-1';
+	if(temperature<30.00) return 'abnormal-2';
+	return 'abnormal-3';
+}
+function RawDataAdapter(id,current,temperature){
 
+  type=mappingTemperatureToType(temperature);
+
+  setContentTitle(id,type,id);
+  setMachineStatusForTemperature(id,type,current,temperature);
+
+  setHealthStatusForTemperature(id,type,current,temperature);
+  setStatusLevel(id,type);
+  setProblemSection(id,type);
 }
 
 
@@ -159,6 +174,28 @@ function setMachineStatus(id,type){
 
   $(id+' #content-status-text').html('狀態:'+status_map[type]);
 }
+
+
+
+
+function setMachineStatusForTemperature(id,type,current,temperature){
+
+
+  style_map={
+    "normal":'status__text status__text--green',
+    "standby":'status__text status__text--gray',
+    "abnormal-1":'status__text status__text--yellow',
+    "abnormal-2":'status__text status__text--red',
+    "abnormal-3":'status__text status__text--red'
+  };
+
+  $(id+' #content-status-text').attr('class',style_map[type]);
+
+  $(id+' #content-status-text').html('溫度:'+temperature+'℃<br>電流:'+current);
+
+}
+
+
 function setProblemSection(id,type){
   style_map={
     "normal":'content__problem problem',
@@ -189,6 +226,22 @@ function setHealthStatus(id,type){
 
   $(id+' #content-problem-section-health').html('狀態:'+status_map[type]);
 }
+
+
+function setHealthStatusForTemperature(id,type){
+  status_map={
+    "normal":'正常',
+    "standby":'待機',
+    "abnormal-1":'高溫',
+    "abnormal-2":'高溫',
+    "abnormal-3":'過熱'
+  };
+
+  $(id+' #content-problem-section-health').html('狀態:'+status_map[type]);
+}
+
+
+
 function setStatusLevel(id,type){
   status_map={
     "normal":'正常',
