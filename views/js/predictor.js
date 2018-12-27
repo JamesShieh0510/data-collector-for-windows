@@ -1,4 +1,11 @@
-var test_count=990;
+var test_count=999; //for ver
+//var test_count=790; //for 
+//var test_count=1300
+test_count=1;              
+root_url='http://127.0.0.1:3000/';
+//root_url='http://140.116.234.166:23005/';
+//x1305 ab-1
+
 $(document).ready(function(){
 
   //testing data 
@@ -13,16 +20,23 @@ $(document).ready(function(){
   PredictorWebServiceAdapter('#0009','standby');
   setInterval(function(){
     call_predictor_api('x'+(test_count).toString()+'.txt');
-    test_count++;
-  }, 3000);
+    test_count=test_count+100;
+  }, 1000);
   setInterval(function(){
     call_raw_data_api('test_'+(test_count_for_temp).toString()+'.lvm');
     test_count_for_temp++;
-  }, 3000);
+  }, 20000);
+
+  //set localhost ip
+  $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+  result=JSON.stringify(data, null, 2);
+  if (data["geobytesremoteip"]=="140.116.234.166")
+	root_url='http://140.116.234.166:23005/';
+  	console.log(root_url);
+});
 });
 
-root_url='http://127.0.0.1:3000/';
-root_url='http://140.116.234.166:23005/';
+
 function call_predictor_api(target){
   url=root_url+'predictor/'+target;
 
@@ -45,7 +59,6 @@ function call_predictor_api(target){
           console.log('target_file:'+response['target']);
           console.log('result:'+response['predicted_result']);         
         }
-
         predicted_result=response['predicted_result'];
         id="#0001";
         PredictorWebServiceAdapter(id,predicted_result);

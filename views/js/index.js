@@ -64,12 +64,14 @@ ctxArray.map((value, index) => {
  */
 // The element show in the lightbox.
 $(document).ready(function(){
-const img = document.body.querySelector('.content__element')
+//const img = document.body.querySelector('.content__element')
+const img=document.getElementById('light-box-content'); 
 
 // The lightbox container.
 const lightbox = document.body.querySelector('.lightbox')
 
 // Set addEventListener to pop out the lightbox.
+value= $('#0001 .content__status #content-status-text');
 value=document.getElementById('0001'); 
 value.addEventListener('click', () => {
   lightbox.classList.add('lightbox--active')
@@ -82,7 +84,10 @@ value.addEventListener('click', () => {
 lightbox.addEventListener('click', e => {
   if (e.target === lightbox) {
     lightbox.classList.remove('lightbox--active')
+    //alert($(lightbox.children[0]).html());
+    $(lightbox.children[0]).html('');
     lightbox.children[0].removeChild(lightbox.children[0].childNodes[0])
+    //lightbox.removeChild(lightbox.children[0].childNodes[0])
   }
 })
 });

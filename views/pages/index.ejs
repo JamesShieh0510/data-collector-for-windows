@@ -32,10 +32,8 @@
           <!-- car 1-->
           <article id="0001" class="machine__content content">
             <header id="content-header" class="content__header header content__header--green">
-              <a href="#" data-src-full="">
               <label class="header__title">機器編號：</label>
               <label id="content-title" class="header__number">5X-29</label>
-              </a>
             </header>
             <section class="content__status status"><img class="status__img" src="/images/Design/MACHINE.png"/>
               <label id="content-status-text" class="status__text status__text--gray">狀態：加工</label>
@@ -321,13 +319,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/predictor.js"></script>
-    <div class="content__element">
-      <iframe width="1420px" height="450px" src="http://140.116.86.178:3000" class="content__element--iframe"></iframe>
-    </div>
-<!-- lightbox -->
 
+<!-- lightbox -->
+<div style="display: none">
+  <iframe id="light-box-content" width="1420px" height="450px" src="http://140.116.86.178:3000/vibration" class="content__element--iframe"></iframe>
+</div>
 <section class="lightbox">
-  <section class="lightbox__content content"></section>
+  <section class="lightbox__content content">
+      
+    </iframe>
+  </section>
 
 </section>
   </body>

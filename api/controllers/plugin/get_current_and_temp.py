@@ -45,11 +45,12 @@ try:
     file = open(raw_data_path+query_file_name, "r") 
     line_List=file.readlines()
     last_Line_array=(line_List[-1]).replace('\n','').split('\t')
-
+    last_Line_array[2]=str(round(float(last_Line_array[2]),1))
+    #print(round(float(last_Line_array[2]),1))
     print (split_char+query_file_name+split_char+last_Line_array[1]+split_char+last_Line_array[2]+split_char)
 
 except:
-    print (split_char+query_file_name+split_char+ "error"+split_char)
+    print (split_char+query_file_name+split_char+'____'+split_char+'____'+split_char)
 
 
     
