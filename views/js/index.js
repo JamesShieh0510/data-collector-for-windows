@@ -64,31 +64,39 @@ ctxArray.map((value, index) => {
  */
 // The element show in the lightbox.
 $(document).ready(function(){
-//const img = document.body.querySelector('.content__element')
-const img=document.getElementById('light-box-content'); 
 
-// The lightbox container.
-const lightbox = document.body.querySelector('.lightbox')
+  addChartLightbox('0001','http://140.116.86.178:3000/vibration');
+  addChartLightbox('0002','http://140.116.86.178:3000/current');
 
-// Set addEventListener to pop out the lightbox.
-value= $('#0001 .content__status #content-status-text');
-value=document.getElementById('0001'); 
-value.addEventListener('click', () => {
-  lightbox.classList.add('lightbox--active')
-  // Copy the element and show in the lightbox.
-  const cp = img.cloneNode(true)
-  lightbox.children[0].appendChild(cp)
-})
-
-// Click the gray area will close the lightbox.
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) {
-    lightbox.classList.remove('lightbox--active')
-    //alert($(lightbox.children[0]).html());
-    $(lightbox.children[0]).html('');
-    lightbox.children[0].removeChild(lightbox.children[0].childNodes[0])
-    //lightbox.removeChild(lightbox.children[0].childNodes[0])
-  }
-})
 });
 
+
+
+function addChartLightbox(id,url){
+
+
+  // The lightbox container.
+  lightbox = document.body.querySelector('.lightbox');
+  value= $('#'+id+' .content__status #content-status-text');
+  value=document.getElementById(id); 
+  // Set addEventListener to pop out the lightbox.
+  value.addEventListener('click', () => {
+    img=document.getElementById('light-box-content'); 
+    $(img).attr("src",url);
+    lightbox.classList.add('lightbox--active');
+    // Copy the element and show in the lightbox.
+    const cp = img.cloneNode(true);
+    lightbox.children[0].appendChild(cp);
+  });
+
+  // Click the gray area will close the lightbox.
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('lightbox--active');
+      //alert($(lightbox.children[0]).html());
+      $(lightbox.children[0]).html('');
+      lightbox.children[0].removeChild(lightbox.children[0].childNodes[0]);
+      //lightbox.removeChild(lightbox.children[0].childNodes[0])
+    }
+  });
+}

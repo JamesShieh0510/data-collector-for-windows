@@ -24,16 +24,16 @@ $(document).ready(function(){
   }, 2000);
   setInterval(function(){
     call_raw_data_api('test_'+(test_count_for_temp).toString()+'.lvm');
-    test_count_for_temp++;
+    test_count_for_temp=test_count_for_temp+5;
   }, 8000);
 
   //set localhost ip
   $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-  result=JSON.stringify(data, null, 2);
-  if (data["geobytesremoteip"]=="140.116.234.166")
+	result=JSON.stringify(data, null, 2);
+	if (data["geobytesremoteip"]=="140.116.234.166")
 	root_url='http://140.116.234.166:23005/';
-  	console.log(root_url);
-});
+		console.log(root_url);
+	});
 });
 
 
