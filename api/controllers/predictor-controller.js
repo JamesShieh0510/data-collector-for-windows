@@ -2,7 +2,13 @@
 
 const child_process = require('child_process');
 var config = require('../../config.json');
-
+function getClientIp(req) {
+var ip = (req.headers['x-forwarded-for'] || '').split(',').pop() || 
+         req.connection.remoteAddress || 
+         req.socket.remoteAddress || 
+         req.connection.socket.remoteAddress
+  return ip;
+};
 exports.predict_result= function(req, res, callback) {
 	var predictItemId='';
 	if ( typeof req.params.predictItemId !== 'undefined' && req.params.predictItemId )
@@ -34,6 +40,7 @@ exports.predict_result= function(req, res, callback) {
 		workerProcess.on('exit', function (code) {
 			console.log('Child process exited with exit code ' + code);
 		});
+		console.log("client:"+getClientIp(req));
 	} catch (err) {
 	  callback(err);
 	}

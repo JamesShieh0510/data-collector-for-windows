@@ -1,4 +1,4 @@
-const ctx = document.getElementsByClassName('canvas__pie')
+﻿const ctx = document.getElementsByClassName('canvas__pie')
 const green = document.getElementsByClassName('execute__green')
 const red = document.getElementsByClassName('execute__red')
 

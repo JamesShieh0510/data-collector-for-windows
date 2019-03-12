@@ -1,7 +1,7 @@
 {
     "algorithm_cmd" : "python C:\\predict_online.py",
     "current_and_temp_collector_cmd" : "python C:\\get_current_and_temp.py",
-    "model_path" : "C:\\Vibration100hz.h5",
+    "model_path" : "C:\\CNC12000rpm.h5",
     "algorithm_path" : "C:\\Users\\autolab\\data-collector-for-windows\\api\\controllers\\plugin",
     "raw_data_path" : "C:\\can-bus-project\\data\\vibration\\",
     "current_and_temp_data_path" : "C:\\can-bus-project\\data\\current\\",

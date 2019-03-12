@@ -1,9 +1,9 @@
-var test_count=999; //for ver
+﻿var test_count=999; //for ver
 //var test_count=790; //for 
 //var test_count=1300
 test_count=1;              
 root_url='http://127.0.0.1:3000/';
-//root_url='http://140.116.234.166:23005/';
+root_url='http://140.116.234.166:23005/';
 //x1305 ab-1
 
 $(document).ready(function(){
@@ -17,15 +17,15 @@ $(document).ready(function(){
   PredictorWebServiceAdapter('#0006','standby');
   PredictorWebServiceAdapter('#0007','standby');
   PredictorWebServiceAdapter('#0008','standby');
-  PredictorWebServiceAdapter('#0009','standby');
+  PredictorWebServiceAdapter('#0009','standby');	
   setInterval(function(){
     call_predictor_api('x'+(test_count).toString()+'.txt');
-    test_count=test_count+1000;
-  }, 2000);
+    test_count=test_count+200;
+  }, 1000);
   setInterval(function(){
     call_raw_data_api('test_'+(test_count_for_temp).toString()+'.lvm');
     test_count_for_temp=test_count_for_temp+5;
-  }, 8000);
+  }, 3000);
 
   //set localhost ip
   $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
 function call_predictor_api(target){
-  url=root_url+'predictor/'+target;
+  url=root_url+'predictor/' ;//+target;
 
   $.ajax({
     url: url,
@@ -55,14 +55,16 @@ function call_predictor_api(target){
         //result= $.parseJSON(response);
         //alert(result.error);
         //alert(result);
+	console.log('target_file:'+response['target']);
         if (response['predicted_result']!='standby'){
           console.log('target_file:'+response['target']);
           console.log('result:'+response['predicted_result']);         
         }
         predicted_result=response['predicted_result'];
         id="#0001";
+	
         PredictorWebServiceAdapter(id,predicted_result);
-
+	
  
     }
   });
@@ -71,7 +73,7 @@ function call_predictor_api(target){
 
 var test_count_for_temp=1;
 function call_raw_data_api(target){
-  url=root_url+'data/current_and_temperature/'+target;
+  url=root_url+'data/current_and_temperature/';
 
   $.ajax({
     url: url,
@@ -93,20 +95,21 @@ function call_raw_data_api(target){
 
         current=response['current'];
         temperature=response['temperature'];
-
+	
         id="#0002";
-        RawDataAdapter(id,current,temperature);
-
+	if (typeof(current) != "undefined"){
+		RawDataAdapter(id,current,temperature);
+	}
  		//溫度：27 電流：23
     }
   });
   //alert('test');
 }
 function mappingTemperatureToType(temperature){
-	if(temperature<18.07) return 'standby';
-	if(temperature<23.10) return 'normal';
-	if(temperature<24.15) return 'abnormal-1';
-	if(temperature<30.00) return 'abnormal-2';
+	if(temperature<24.00) return 'standby';
+	if(temperature<27.00) return 'normal';
+	if(temperature<31.00) return 'abnormal-1';
+	if(temperature<36.00) return 'abnormal-2';
 	return 'abnormal-3';
 }
 function RawDataAdapter(id,current,temperature){
