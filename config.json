@@ -1,11 +1,36 @@
 {
     "algorithm_cmd" : "ipython ./predict_online.py",
     "current_and_temp_collector_cmd" : "ipython ./get_current_and_temp.py",
+    "canbus_collector_cmd" : "ipython ./get_canbus_raw_data.py",
     "model_path" : "/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/eccentric_994%.h5",
     "algorithm_path" : "/Volumes/Document/Git/data-collector-for-windows/api/controllers/plugin/",
     "raw_data_path" : "test-data/data/",
     "current_and_temp_data_path" : "test-data/current/",
     "uploader_local_path" : "/Users/jamesshieh/Downloads/DATA1",
-	"uploader_remote_path" : "vibration/"
+	"uploader_remote_path" : "vibration/",
+	"canbus_sensors":[
+		{"name":"主馬達扭矩",	"id":0,	"accuracy":2,"unit":	"±100"	,"unit":"Nm"	},	
+		{"name":"主馬達轉速",	"id":1,	"accuracy":2,"range":	"±500"	,"unit":"rpm" 		},
+		{"name":"主馬達電壓",	"id":2,	"accuracy":2,"range":	"＋400"	,"unit":"V"			},
+		{"name":"主馬達電流",	"id":3,	"accuracy":2,"range":	"±100"	,"unit":"A"			},
+		{"name":"主馬達溫度",	"id":4,	"accuracy":2,"range":	"＋200"	,"unit":"℃"			},
+		{"name":"輔助馬達扭矩L","id":	5,	"accuracy":2,"range":	"±100"	,"unit":"Nm"		},
+		{"name":"輔助馬達轉速L","id":	6,	"accuracy":2,"range":	"±500"	,"unit":"rpm"		},
+		{"name":"輔助馬達電壓L","id":	7,	"accuracy":2,"range":	"＋400"	,"unit":"V"		},
+		{"name":"輔助馬達電流L","id":	8,	"accuracy":2,"range":	"±100"	,"unit":"A"		},
+		{"name":"輔助馬達溫度L","id":	9,	"accuracy":2,"range": 	"＋200"	,"unit":"℃"		},
+		{"name":"輔助馬達扭矩R","id":	10,	"accuracy":2,"range":	"±100"	,"unit":"Nm"		},
+		{"name":"輔助馬達轉速R","id":	11,	"accuracy":2,"range":	"±500"	,"unit":"rpm"		},
+		{"name":"輔助馬達電壓R","id":	12,	"accuracy":2,"range":	"＋400"	,"unit":"V"		},
+		{"name":"輔助馬達電流R","id":	13,	"accuracy":2,"range":	"±100"	,"unit":"A"		},
+		{"name":"輔助馬達溫度R","id":	14,	"accuracy":2,"range":	"＋200"	,"unit":"℃"		},
+		{"name":"加速規電壓X",	"id":	15,	"accuracy":3,"range":	"0~5"	,"unit":"V"				},
+		{"name":"加速規電壓Y",	"id":	16,	"accuracy":3,"range":	"0~5"	,"unit":"V"				},
+		{"name":"加速規電壓Z",	"id":	17,	"accuracy":3,"range":	"0~5"	,"unit":"V"				},
+		{"name":"工具機溫度",	"id":	18,	"accuracy":3,"range":	"0~5"	,"unit":"℃"				},
+		{"name":"工具機振動",	"id":	19,	"accuracy":3,"range":	"0~5"	,"unit":"V"				}
+
+
+	]
 }
 

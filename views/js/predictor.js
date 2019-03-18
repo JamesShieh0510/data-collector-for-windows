@@ -3,28 +3,21 @@
 //var test_count=1300
 test_count=1;              
 root_url='http://127.0.0.1:3000/';
-root_url='http://140.116.234.166:23005/';
+//root_url='http://140.116.234.166:23005/';
 //x1305 ab-1
 
 $(document).ready(function(){
 
   //testing data 
-  PredictorWebServiceAdapter('#0001','standby');
-  PredictorWebServiceAdapter('#0002','standby');
-  PredictorWebServiceAdapter('#0003','standby');
-  PredictorWebServiceAdapter('#0004','standby');
-  PredictorWebServiceAdapter('#0005','standby');
-  PredictorWebServiceAdapter('#0006','standby');
-  PredictorWebServiceAdapter('#0007','standby');
-  PredictorWebServiceAdapter('#0008','standby');
-  PredictorWebServiceAdapter('#0009','standby');	
+  PredictorWebServiceAdapter('#19','standby');
+
+
+  // setInterval(function(){
+  //   call_predictor_api('x'+(test_count).toString()+'.txt');
+  //   test_count=test_count+200;
+  // }, 1000);
   setInterval(function(){
-    call_predictor_api('x'+(test_count).toString()+'.txt');
-    test_count=test_count+200;
-  }, 1000);
-  setInterval(function(){
-    call_raw_data_api('test_'+(test_count_for_temp).toString()+'.lvm');
-    test_count_for_temp=test_count_for_temp+5;
+    call_raw_data_api();
   }, 3000);
 
   //set localhost ip
@@ -71,9 +64,8 @@ function call_predictor_api(target){
   //alert('test');
 }
 
-var test_count_for_temp=1;
 function call_raw_data_api(target){
-  url=root_url+'data/current_and_temperature/';
+  url=root_url+'canbus-data/canbus_raw_data/';
 
   $.ajax({
     url: url,
@@ -83,28 +75,35 @@ function call_raw_data_api(target){
     },
     error: function(xhr) {
       console.log('Ajax request 發生錯誤:'+xhr);
-      console.log('count:'+test_count_for_temp);
     },
     success: function(response) {
         //alert(response);
         //result= $.parseJSON(response);
         //alert(result.error);
         //alert(result);
+        var sensor_amount=response['target'].length
+        $('#sensors-containter').html('');
+        for (i=0;i<sensor_amount;i++){
+          sensor=response['target'][i];
+          $('#sensors-containter').append($('#sensenr-card-template').html());
+          $('#sensors-containter #0000').attr('id',sensor['id']);
+          if (typeof(sensor['value']) != "-1"){
+            RawDataAdapter('#'+sensor['id'],sensor['timestamp'],sensor['name'],sensor['value'],sensor['unit']);
+        }
 
-      console.log('raw_data_count:'+test_count_for_temp);
 
-        current=response['current'];
-        temperature=response['temperature'];
-	
-        id="#0002";
-	if (typeof(current) != "undefined"){
-		RawDataAdapter(id,current,temperature);
 	}
- 		//溫度：27 電流：23
     }
   });
-  //alert('test');
 }
+
+function paddingLeft(str,lenght,prefix_char){
+  if(str.length >= lenght)
+  return str;
+  else
+  return paddingLeft(prefix_char +str,lenght);
+}
+
 function mappingTemperatureToType(temperature){
 	if(temperature<24.00) return 'standby';
 	if(temperature<27.00) return 'normal';
@@ -112,14 +111,65 @@ function mappingTemperatureToType(temperature){
 	if(temperature<36.00) return 'abnormal-2';
 	return 'abnormal-3';
 }
-function RawDataAdapter(id,current,temperature){
 
-  type=mappingTemperatureToType(temperature);
+function mappingMotroTorqueToType(Torque){
+  if(Torque<1.00) return 'standby';
+  if(Torque<200.00) return 'normal';
+  if(Torque<250.00) return 'abnormal-1';
+  if(Torque<300.00) return 'abnormal-2';
+  return 'abnormal-3';
+}
 
-  setContentTitle(id,type,id);
-  setMachineStatusForTemperature(id,type,current,temperature);
+function mappingMotroRotatingSpeedToType(RotatingSpeed){
+  if(RotatingSpeed<11.00) return 'standby';
+  if(RotatingSpeed<22.00) return 'normal';
+  if(RotatingSpeed<37.00) return 'abnormal-1';
+  if(RotatingSpeed<500.00) return 'abnormal-2';
+  return 'abnormal-3';
+}
+function mappingVoltageToType(Voltage){
+  if(Voltage<100.00) return 'standby';
+  if(Voltage<400.00) return 'normal';
+  if(Voltage<600.00) return 'abnormal-1';
+  if(Voltage<800.00) return 'abnormal-2';
+  return 'abnormal-3';
+}
 
-  setHealthStatusForTemperature(id,type,current,temperature);
+function mappingCurrentToType(Current){
+  if(Current<50.00) return 'standby';
+  if(Current<100.00) return 'normal';
+  if(Current<150.00) return 'abnormal-1';
+  if(Current<200.00) return 'abnormal-2';
+  return 'abnormal-3';
+}
+
+function RawDataAdapter(id,timestamp,name,value,unit){
+  if      (unit.localeCompare("℃")==0)
+    type=mappingTemperatureToType(parseFloat(value));
+  else if (unit.localeCompare("Nm")==0)
+    type=mappingMotroTorqueToType(parseFloat(value));//扭矩
+  else if (unit.localeCompare("rpm")==0)
+    type=mappingMotroRotatingSpeedToType(value);//轉速
+  else if (unit.localeCompare("V")==0)
+    type=mappingVoltageToType(parseFloat(value));
+  else if (unit.localeCompare("A")==0)
+    type=mappingCurrentToType(parseFloat(value));
+  else
+    type=null;
+  
+  formatting_value=paddingLeft(parseFloat(value).toFixed(3),7,'&nbsp;');
+
+  if (parseFloat(value)<0)
+    value_with_unit="待機";
+  else
+    value_with_unit=formatting_value+'('+unit+')';
+  //$('#sensors-containter #0000').attr('id','#'+paddingLeft(sensor['id'],4));
+
+  setContentTitle(id,type,name);
+
+  setMachineStatusForCanbus(id,type,''+value_with_unit);
+  setHealthStatusForCanbusData(id,type,value);
+  setMachineTimestampForCanbus(id,type,timestamp);
   setStatusLevel(id,type);
   setProblemSection(id,type);
 }
@@ -152,7 +202,8 @@ function setContentTitle(id,type,text){
     "abnormal-3":'content__header header content__header--red'
   };
   $(id+' #content-header').attr('class',style_map[type]);
-
+  var number=id.substring(1,id.length)
+  $(id+' .header__title').html('#'+paddingLeft(number,2,'0'));
   $(id+' #content-title').html(text);
 }
 
@@ -181,7 +232,7 @@ function setMachineStatus(id,type){
 
 
 
-function setMachineStatusForTemperature(id,type,current,temperature){
+function setMachineStatusForTemperature(id,type,value){
 
 
   style_map={
@@ -194,9 +245,44 @@ function setMachineStatusForTemperature(id,type,current,temperature){
 
   $(id+' #content-status-text').attr('class',style_map[type]);
 
-  $(id+' #content-status-text').html('溫度:'+temperature+'℃<br>電流:'+current);
+  $(id+' #content-status-text').html(value);
 
 }
+
+function setMachineStatusForCanbus(id,type,value){
+
+
+  style_map={
+    "normal":'status__text status__text--green',
+    "standby":'status__text status__text--gray',
+    "abnormal-1":'status__text status__text--yellow',
+    "abnormal-2":'status__text status__text--red',
+    "abnormal-3":'status__text status__text--red'
+  };
+
+  $(id+' #content-status-text').attr('class',style_map[type]);
+
+  $(id+' #content-status-text').html(value);
+
+}
+
+function setMachineTimestampForCanbus(id,type,value){
+
+
+  style_map={
+    "normal":'status__text status__text--green',
+    "standby":'status__text status__text--gray',
+    "abnormal-1":'status__text status__text--yellow',
+    "abnormal-2":'status__text status__text--red',
+    "abnormal-3":'status__text status__text--red'
+  };
+
+  $(id+' #content-status-text').attr('class',style_map[type]);
+
+  $(id+' #content-raw-data-text').html(value);
+
+}
+
 
 
 function setProblemSection(id,type){
@@ -230,14 +316,24 @@ function setHealthStatus(id,type){
   $(id+' #content-problem-section-health').html('狀態:'+status_map[type]);
 }
 
+function setHealthStatusForCanbusData(id,type){
+  status_map={
+    "normal":'運轉',
+    "standby":'等待連線',
+    "abnormal-1":'數值偏高',
+    "abnormal-2":'數值異常',
+    "abnormal-3":'毀損警告'
+  };
+  $(id+' #content-problem-section-health').html('提示:'+status_map[type]);
 
+}
 function setHealthStatusForTemperature(id,type){
   status_map={
     "normal":'正常',
     "standby":'待機',
-    "abnormal-1":'高溫',
-    "abnormal-2":'高溫',
-    "abnormal-3":'過熱'
+    "abnormal-1":'注意',
+    "abnormal-2":'嚴重',
+    "abnormal-3":'危險'
   };
 
   $(id+' #content-problem-section-health').html('狀態:'+status_map[type]);
